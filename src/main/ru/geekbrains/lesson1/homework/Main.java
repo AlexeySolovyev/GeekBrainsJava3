@@ -1,5 +1,8 @@
 package ru.geekbrains.lesson1.homework;
 
+import ru.geekbrains.lesson1.homework.fruits.Apple;
+import ru.geekbrains.lesson1.homework.fruits.Orange;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +15,28 @@ import java.util.List;
             changeElements(0,1,strArr);
             arrlist = ArrayToList(strArr);
             System.out.println(arrlist);
+
+
+
+            Box<Orange> orangeBox1 = new Box<>();
+            Box<Orange> orangeBox2 = new Box<>();
+            Box<Apple> appleBox1 = new Box<>();
+            Box<Apple> appleBox2 = new Box<>();
+
+            orangeBox1.addFruit(new Orange());
+            orangeBox1.addFruit(new Orange());
+
+            orangeBox2.addFruit(new Orange());
+
+            appleBox1.addFruit(new Apple());
+            appleBox1.addFruit(new Apple());
+            appleBox1.addFruit(new Apple());
+
+            System.out.println(appleBox1.compare(orangeBox1));
+
+            appleBox2.moveFruits(appleBox1);
+
+            System.out.println(appleBox2.getFruitsList());
 
         }
         public static <T> T printType(T val) {

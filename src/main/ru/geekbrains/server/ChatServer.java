@@ -27,8 +27,7 @@ public class ChatServer {
     public static void main(String[] args) {
         AuthService authService;
         try {
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/network_chat",
-                    "root", "root");
+            Connection conn = DriverManager.getConnection("jdbc:sqlite:C:/Users/Nikolay.Pluzhnikov/Documents/Development/Java/sqllitedb/network_chat.db");
             UserRepository userRepository = new UserRepository(conn);
             authService = new AuthServiceJdbcImpl(userRepository);
         } catch (SQLException e) {
@@ -124,7 +123,10 @@ public class ChatServer {
     }
 
     public void subscribe(String login, Socket socket) throws IOException {
-        // TODO Проверить, подключен ли уже пользователь. Если да, то отправить клиенту ошибку
+        if (clientHandlerMap.get(login) == null ){
+            //sendUserConnectedErrorMessage(login);
+            return;
+        }
         clientHandlerMap.put(login, new ClientHandler(login, socket, this));
         sendUserConnectedMessage(login);
     }
